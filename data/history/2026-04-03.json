@@ -21,5 +21,13 @@
     "direct_ok": 5,
     "direct_total": 5,
     "proxy_obfs2_ok": false
+  },
+  {
+    "timestamp": "2026-04-03T17:50:28Z",
+    "probe_id": "github-us",
+    "region": "US (GitHub Actions)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": false
   }
 ]
