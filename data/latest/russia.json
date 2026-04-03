@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-04-03T18:20:12Z",
-  "probe_id": "russia-firstvds",
-  "region": "Russia (FirstVDS)",
+  "timestamp": "2026-04-03T18:23:13Z",
+  "probe_id": "russia",
+  "region": "Russia",
   "direct": {
     "dc1": {
       "status": "ok",
@@ -9,11 +9,11 @@
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 41
+      "latency_ms": 44
     },
     "dc3": {
       "status": "ok",
-      "latency_ms": 144
+      "latency_ms": 145
     },
     "dc4": {
       "status": "ok",
@@ -30,9 +30,9 @@
       "connected": true,
       "authenticated": true,
       "get_me": true,
-      "connect_ms": 6348,
-      "auth_ms": 1463,
-      "total_ms": 8190,
+      "connect_ms": 5458,
+      "auth_ms": 1448,
+      "total_ms": 7264,
       "error": null
     }
   ]
