@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telegram Censorship Observatory</title>
+  <meta name="description" content="Live monitoring of Telegram accessibility worldwide. Real connectivity tests from multiple regions.">
+  <meta property="og:title" content="Telegram Censorship Observatory">
+  <meta property="og:description" content="Live monitoring of Telegram accessibility worldwide.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Telegram Censorship Observatory</h1>
+      <p id="last-updated">Loading...</p>
+    </header>
+
+    <div id="probes" class="status-cards">
+      <div class="loading">Loading probe data...</div>
+    </div>
+
+    <div class="section">
+      <h2>Methodology</h2>
+      <p>
+        Each probe location runs two tests hourly:
+      </p>
+      <p>
+        <strong>Direct connectivity</strong> &mdash; TCP connection attempts to all five
+        Telegram production datacenters on port 443. If these fail, Telegram is blocked
+        at the network level from that location.
+      </p>
+      <p>
+        <strong>Proxy E2E</strong> &mdash; A real Telegram client connects through a
+        <a href="https://github.com/teleproxy/teleproxy">Teleproxy</a> instance using
+        fake-TLS transport, authenticates, and makes an API call. This proves the full
+        circumvention path works end-to-end.
+      </p>
+      <p>
+        If direct connectivity fails but the proxy test succeeds, Telegram is blocked
+        but accessible through Teleproxy.
+      </p>
+    </div>
+
+    <footer>
+      Powered by <a href="https://github.com/teleproxy/teleproxy">Teleproxy</a>
+      &middot;
+      <a href="https://github.com/teleproxy/observatory">Source</a>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
