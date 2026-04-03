@@ -2,7 +2,7 @@ name: Probe
 
 on:
   schedule:
-    - cron: '17 * * * *'   # Hourly at :17
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 concurrency:
@@ -13,10 +13,15 @@ permissions:
   contents: write
 
 jobs:
-  probe:
+  probe-us:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            probes
+            requirements.txt
 
       - uses: actions/setup-python@v5
         with:
@@ -34,9 +39,69 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         run: python -m probes.runner --probe-id github-us --region "US (GitHub Actions)"
 
+      - name: Upload probe result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-github-us
+          path: data/latest/github-us.json
+          retention-days: 1
+          if-no-files-found: ignore
+
+  probe-russia:
+    runs-on: [self-hosted, russia]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run probes
+        env:
+          PROXY_HOST: ${{ secrets.PROXY_HOST }}
+          PROXY_PORT: ${{ secrets.PROXY_PORT }}
+          PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
+          PROXY_DOMAIN: ${{ secrets.PROXY_DOMAIN }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: python -m probes.runner --probe-id russia-firstvds --region "Russia (FirstVDS)"
+
+      - name: Upload probe result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-russia-firstvds
+          path: data/latest/russia-firstvds.json
+          retention-days: 1
+          if-no-files-found: ignore
+
+  publish:
+    needs: [probe-us, probe-russia]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download probe artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+          pattern: probe-*
+
+      - name: Merge results
+        run: python -m probes.merge
+
       - name: Prune old history
-        run: |
-          find data/history -name '*.json' -mtime +90 -delete 2>/dev/null || true
+        run: find data/history -name '*.json' -mtime +90 -delete 2>/dev/null || true
 
       - name: Commit results
         run: |
