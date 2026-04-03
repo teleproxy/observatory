@@ -6,7 +6,7 @@ data/latest/{probe_id}.json and appends a summary to
 data/history/YYYY-MM-DD.json.
 
 Usage:
-    PROXY_HOST=... PROXY_PORT=... PROXY_SECRET=... PROXY_DOMAIN=... \
+    PROXY_HOST=... PROXY_PORT=... PROXY_SECRET=... \
     TG_BOT_TOKEN=... \
     python -m probes.runner --probe-id github-us --region "US (GitHub Actions)"
 """
@@ -35,30 +35,30 @@ def run(probe_id, region):
     dc_total = len(direct_results)
     print(f"  Direct: {dc_ok}/{dc_total} DCs reachable")
 
-    # Proxy E2E (skip if env vars are missing)
-    proxy_result = None
-    proxy_vars = ["PROXY_HOST", "PROXY_PORT", "PROXY_SECRET",
-                  "PROXY_DOMAIN", "TG_BOT_TOKEN"]
-    missing = [v for v in proxy_vars if not os.environ.get(v)]
+    # Proxy E2E (skip if required env vars are missing)
+    proxy_results = []
+    required_vars = ["PROXY_HOST", "PROXY_PORT", "PROXY_SECRET", "TG_BOT_TOKEN"]
+    missing = [v for v in required_vars if not os.environ.get(v)]
     if missing:
         print(f"  Proxy E2E: SKIPPED (missing: {', '.join(missing)})")
     else:
         print("Running proxy E2E probe...")
         try:
             from probes.proxy_e2e import probe_proxy
-            proxy_result = probe_proxy()
-            status = "OK" if proxy_result["get_me"] else "FAIL"
-            detail = proxy_result.get("error") or f"{proxy_result['total_ms']}ms"
-            print(f"  Proxy E2E: {status} ({detail})")
+            proxy_results = probe_proxy()
+            for r in proxy_results:
+                status = "OK" if r["get_me"] else "FAIL"
+                detail = r.get("error") or f"{r['total_ms']}ms"
+                print(f"  {r['transport']}: {status} ({detail})")
         except Exception as e:
             print(f"  Proxy E2E: ERROR ({type(e).__name__}: {e})")
-            proxy_result = {
-                "transport": "fake-tls",
+            proxy_results = [{
+                "transport": "obfs2",
                 "connected": False,
                 "authenticated": False,
                 "get_me": False,
                 "error": f"{type(e).__name__}: {e}",
-            }
+            }]
 
     # Build result
     result = {
@@ -67,8 +67,8 @@ def run(probe_id, region):
         "region": region,
         "direct": direct_results,
     }
-    if proxy_result is not None:
-        result["proxy"] = proxy_result
+    if proxy_results:
+        result["proxy"] = proxy_results
 
     # Write latest
     data_dir = Path(__file__).resolve().parent.parent / "data"
@@ -90,9 +90,9 @@ def run(probe_id, region):
         "direct_ok": dc_ok,
         "direct_total": dc_total,
     }
-    if proxy_result is not None:
-        summary["proxy_ok"] = proxy_result["get_me"]
-        summary["proxy_ms"] = proxy_result.get("total_ms")
+    for r in proxy_results:
+        key = f"proxy_{r['transport'].replace('-', '_')}_ok"
+        summary[key] = r["get_me"]
 
     history_file = history_dir / f"{date_str}.json"
     if history_file.exists():
@@ -130,7 +130,7 @@ def main():
     direct_ok = any(
         r["status"] == "ok" for r in result["direct"].values()
     )
-    proxy_ok = result.get("proxy", {}).get("get_me", True)
+    proxy_ok = any(r["get_me"] for r in result.get("proxy", [{"get_me": True}]))
 
     if not direct_ok and not proxy_ok:
         print("\nBOTH direct and proxy probes failed!")

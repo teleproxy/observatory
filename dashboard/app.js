@@ -38,18 +38,23 @@
     var directBadge = directStatus === "ok" ? badge("ok") : badge("fail");
 
     var proxyHtml = "";
-    if (probe.proxy) {
-      var p = probe.proxy;
-      var pOk = p.get_me === true;
-      var pCls = pOk ? "ok" : "fail";
-      var pLabel = pOk ? "Connected" : "Failed";
-      var pDetail = pOk ? p.total_ms + "ms" : p.error || "unknown error";
-      proxyHtml =
-        '<div class="proxy-status ' + pCls + '">' +
-        "Proxy (" + (p.transport || "fake-tls") + "): " +
-        "<strong>" + pLabel + "</strong> &mdash; " + pDetail +
-        "</div>";
-    }
+    var proxyList = probe.proxy || [];
+    // Handle both array (new) and object (legacy) formats
+    if (!Array.isArray(proxyList)) proxyList = [proxyList];
+    proxyHtml = proxyList
+      .map(function (p) {
+        var pOk = p.get_me === true;
+        var pCls = pOk ? "ok" : "fail";
+        var pLabel = pOk ? "Connected" : "Failed";
+        var pDetail = pOk ? p.total_ms + "ms" : escapeHtml(p.error || "unknown error");
+        return (
+          '<div class="proxy-status ' + pCls + '">' +
+          "Proxy (" + escapeHtml(p.transport || "obfs2") + "): " +
+          "<strong>" + pLabel + "</strong> &mdash; " + pDetail +
+          "</div>"
+        );
+      })
+      .join("");
 
     return (
       '<div class="card">' +

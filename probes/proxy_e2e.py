@@ -1,17 +1,16 @@
 """End-to-end proxy connectivity probe.
 
-Connects a Telethon client through a teleproxy instance using fake-TLS
-transport, authenticates with a bot token, and calls get_me() to verify
-the full data path works.
+Connects a Telethon client through a teleproxy instance, authenticates
+with a bot token, and calls get_me() to verify the full data path.
+
+Supports two transport modes:
+  - obfs2 (dd-prefix): always tested when PROXY_SECRET is set
+  - fake-TLS (ee-prefix): tested when PROXY_DOMAIN is also set
 """
 
 import asyncio
 import os
 import time
-
-from probes.faketls_patches import patch_telethon_faketls
-
-patch_telethon_faketls()
 
 
 def _get_required_env(name):
@@ -22,28 +21,18 @@ def _get_required_env(name):
     return value
 
 
-async def _probe_proxy_async():
-    """Run the proxy E2E probe.
+async def _test_transport(host, port, proxy_tuple, connection_cls,
+                          bot_token, api_id, api_hash, transport_label):
+    """Test a single transport mode through the proxy.
 
     Returns:
         Dict with connected/authenticated/get_me booleans and timing.
     """
-    from TelethonFakeTLS import ConnectionTcpMTProxyFakeTLS
     from telethon import TelegramClient
     from telethon.sessions import StringSession
 
-    host = _get_required_env("PROXY_HOST")
-    port = int(_get_required_env("PROXY_PORT"))
-    secret = _get_required_env("PROXY_SECRET")
-    domain = _get_required_env("PROXY_DOMAIN")
-    bot_token = _get_required_env("TG_BOT_TOKEN")
-    api_id = int(os.environ.get("TG_API_ID", "2834"))
-    api_hash = os.environ.get("TG_API_HASH", "68875f756c9b437a8b916ca3de215815")
-
-    proxy_secret = secret + domain.encode().hex()
-
     result = {
-        "transport": "fake-tls",
+        "transport": transport_label,
         "connected": False,
         "authenticated": False,
         "get_me": False,
@@ -57,8 +46,8 @@ async def _probe_proxy_async():
         StringSession(),
         api_id,
         api_hash,
-        connection=ConnectionTcpMTProxyFakeTLS,
-        proxy=(host, port, proxy_secret),
+        connection=connection_cls,
+        proxy=proxy_tuple,
     )
 
     total_start = time.monotonic()
@@ -95,10 +84,57 @@ async def _probe_proxy_async():
     return result
 
 
-def probe_proxy():
-    """Run the proxy E2E probe synchronously.
+async def _probe_proxy_async():
+    """Run proxy E2E probes for all available transports.
 
     Returns:
-        Dict with probe results.
+        List of result dicts (one per transport tested).
+    """
+    from telethon.network.connection import (
+        ConnectionTcpMTProxyRandomizedIntermediate,
+    )
+
+    host = _get_required_env("PROXY_HOST")
+    port = int(_get_required_env("PROXY_PORT"))
+    secret = _get_required_env("PROXY_SECRET")
+    bot_token = _get_required_env("TG_BOT_TOKEN")
+    api_id = int(os.environ.get("TG_API_ID", "2834"))
+    api_hash = os.environ.get("TG_API_HASH", "68875f756c9b437a8b916ca3de215815")
+    domain = os.environ.get("PROXY_DOMAIN")
+
+    results = []
+
+    # obfs2 (dd-prefix, randomized padding)
+    obfs2_proxy = (host, port, "dd" + secret)
+    obfs2_result = await _test_transport(
+        host, port, obfs2_proxy,
+        ConnectionTcpMTProxyRandomizedIntermediate,
+        bot_token, api_id, api_hash, "obfs2",
+    )
+    results.append(obfs2_result)
+
+    # fake-TLS (ee-prefix) — only if domain is configured
+    if domain:
+        from probes.faketls_patches import patch_telethon_faketls
+        patch_telethon_faketls()
+        from TelethonFakeTLS import ConnectionTcpMTProxyFakeTLS
+
+        faketls_secret = secret + domain.encode().hex()
+        faketls_proxy = (host, port, faketls_secret)
+        faketls_result = await _test_transport(
+            host, port, faketls_proxy,
+            ConnectionTcpMTProxyFakeTLS,
+            bot_token, api_id, api_hash, "fake-tls",
+        )
+        results.append(faketls_result)
+
+    return results
+
+
+def probe_proxy():
+    """Run the proxy E2E probes synchronously.
+
+    Returns:
+        List of result dicts (one per transport tested).
     """
     return asyncio.run(_probe_proxy_async())
