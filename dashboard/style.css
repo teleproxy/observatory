@@ -93,6 +93,29 @@ header p {
 .badge-fail { background: color-mix(in srgb, var(--fail) 20%, transparent); color: var(--fail); }
 .badge-unknown { background: color-mix(in srgb, var(--text-muted) 20%, transparent); color: var(--text-muted); }
 
+.route {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.route-region {
+  font-weight: 600;
+}
+
+.route-arrow {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.route-target {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .dc-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

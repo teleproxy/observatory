@@ -37,7 +37,11 @@ jobs:
           PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
           PROXY_DOMAIN: ${{ secrets.PROXY_DOMAIN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        run: python -m probes.runner --probe-id github-us --region "US (GitHub Actions)"
+        run: >
+          python -m probes.runner
+          --probe-id github-us
+          --region "🇺🇸 US (GitHub Actions)"
+          --target "🇸🇬 Singapore VPS"
 
       - name: Upload probe result
         if: always()
@@ -64,7 +68,11 @@ jobs:
           PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
           PROXY_DOMAIN: ${{ secrets.PROXY_DOMAIN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        run: python3.12 -m probes.runner --probe-id russia --region "Russia (Moscow VPS)"
+        run: >
+          python3.12 -m probes.runner
+          --probe-id russia
+          --region "🇷🇺 Russia (Moscow VPS)"
+          --target "🇸🇬 Singapore VPS"
 
       - name: Upload probe result
         if: always()

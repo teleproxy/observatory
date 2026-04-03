@@ -56,9 +56,18 @@
       })
       .join("");
 
+    var routeHtml = '<div class="route">' +
+      '<span class="route-region">' + escapeHtml(probe.region) + '</span>';
+    if (probe.target) {
+      routeHtml += '<span class="route-arrow">→</span>' +
+        '<span class="route-target">' + escapeHtml(probe.target) + '</span>';
+    }
+    routeHtml += '</div>';
+
     return (
       '<div class="card">' +
-      "<h2>" + escapeHtml(probe.region) + " " + directBadge + "</h2>" +
+      "<h2>" + directBadge + "</h2>" +
+      routeHtml +
       '<div class="dc-grid">' + dcCells + "</div>" +
       proxyHtml +
       '<div class="meta">Last checked: ' + relativeTime(probe.timestamp) + "</div>" +

@@ -21,7 +21,7 @@ from pathlib import Path
 from probes.direct import probe_direct
 
 
-def run(probe_id, region):
+def run(probe_id, region, target=""):
     """Run all probes and write results."""
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -67,6 +67,8 @@ def run(probe_id, region):
         "region": region,
         "direct": direct_results,
     }
+    if target:
+        result["target"] = target
     if proxy_results:
         result["proxy"] = proxy_results
 
@@ -121,10 +123,11 @@ def run(probe_id, region):
 def main():
     parser = argparse.ArgumentParser(description="Observatory probe runner")
     parser.add_argument("--probe-id", required=True, help="Unique probe identifier")
-    parser.add_argument("--region", required=True, help="Human-readable region name")
+    parser.add_argument("--region", required=True, help="Human-readable source region")
+    parser.add_argument("--target", default="", help="Human-readable proxy target")
     args = parser.parse_args()
 
-    result = run(args.probe_id, args.region)
+    result = run(args.probe_id, args.region, target=args.target)
 
     # Exit with error if both direct and proxy failed
     direct_ok = any(
