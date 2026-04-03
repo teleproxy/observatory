@@ -64,14 +64,14 @@ jobs:
           PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
           PROXY_DOMAIN: ${{ secrets.PROXY_DOMAIN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        run: python3.12 -m probes.runner --probe-id russia-firstvds --region "Russia (FirstVDS)"
+        run: python3.12 -m probes.runner --probe-id russia --region "Russia"
 
       - name: Upload probe result
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: probe-russia-firstvds
-          path: data/latest/russia-firstvds.json
+          name: probe-russia
+          path: data/latest/russia.json
           retention-days: 1
           if-no-files-found: ignore
 

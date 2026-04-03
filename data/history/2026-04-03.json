@@ -56,8 +56,8 @@
   },
   {
     "timestamp": "2026-04-03T18:20:12Z",
-    "probe_id": "russia-firstvds",
-    "region": "Russia (FirstVDS)",
+    "probe_id": "russia",
+    "region": "Russia",
     "direct_ok": 5,
     "direct_total": 5,
     "proxy_obfs2_ok": true
