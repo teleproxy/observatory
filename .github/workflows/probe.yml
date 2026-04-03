@@ -9,6 +9,9 @@ concurrency:
   group: probe
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   probe:
     runs-on: ubuntu-latest
