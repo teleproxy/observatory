@@ -74,13 +74,14 @@
 
   async function loadProbes() {
     try {
-      var indexResp = await fetch("data/index.json");
+      var bust = "?t=" + Math.floor(Date.now() / 1000);
+      var indexResp = await fetch("data/index.json" + bust);
       if (!indexResp.ok) throw new Error("No data yet");
       var probeIds = await indexResp.json();
 
       var probes = await Promise.all(
         probeIds.map(function (id) {
-          return fetch("data/latest/" + id + ".json").then(function (r) {
+          return fetch("data/latest/" + id + ".json" + bust).then(function (r) {
             return r.ok ? r.json() : null;
           });
         })
