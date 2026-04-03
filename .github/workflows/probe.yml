@@ -49,3 +49,16 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
+      - name: Deploy dashboard
+        run: |
+          mkdir -p _site
+          cp -r dashboard/* _site/
+          cp -r data _site/data
+          touch _site/.nojekyll
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
