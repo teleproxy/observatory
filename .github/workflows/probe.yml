@@ -126,6 +126,9 @@ jobs:
           cp -r dashboard/* _site/
           cp -r data _site/data
           touch _site/.nojekyll
+          V=$(date +%s)
+          sed -i "s/app\.js/app.js?v=$V/" _site/index.html
+          sed -i "s/style\.css/style.css?v=$V/" _site/index.html
 
       - uses: peaceiris/actions-gh-pages@v4
         with:
