@@ -1,0 +1,9 @@
+[
+  {
+    "timestamp": "2026-04-03T17:22:07Z",
+    "probe_id": "github-us",
+    "region": "US (GitHub Actions)",
+    "direct_ok": 5,
+    "direct_total": 5
+  }
+]
