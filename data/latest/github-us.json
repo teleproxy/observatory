@@ -1,36 +1,39 @@
 {
-  "timestamp": "2026-04-03T17:50:28Z",
+  "timestamp": "2026-04-03T17:51:44Z",
   "probe_id": "github-us",
   "region": "US (GitHub Actions)",
   "direct": {
     "dc1": {
       "status": "ok",
-      "latency_ms": 65
+      "latency_ms": 50
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 154
+      "latency_ms": 142
     },
     "dc3": {
       "status": "ok",
-      "latency_ms": 80
+      "latency_ms": 47
     },
     "dc4": {
       "status": "ok",
-      "latency_ms": 155
+      "latency_ms": 134
     },
     "dc5": {
       "status": "ok",
-      "latency_ms": 169
+      "latency_ms": 199
     }
   },
   "proxy": [
     {
       "transport": "obfs2",
-      "connected": false,
-      "authenticated": false,
-      "get_me": false,
-      "error": "ValueError: invalid literal for int() with base 10: ''"
+      "connected": true,
+      "authenticated": true,
+      "get_me": true,
+      "connect_ms": 6043,
+      "auth_ms": 1541,
+      "total_ms": 7934,
+      "error": null
     }
   ]
 }
