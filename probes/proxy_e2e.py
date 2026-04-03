@@ -98,9 +98,9 @@ async def _probe_proxy_async():
     port = int(_get_required_env("PROXY_PORT"))
     secret = _get_required_env("PROXY_SECRET")
     bot_token = _get_required_env("TG_BOT_TOKEN")
-    api_id = int(os.environ.get("TG_API_ID", "2834"))
-    api_hash = os.environ.get("TG_API_HASH", "68875f756c9b437a8b916ca3de215815")
-    domain = os.environ.get("PROXY_DOMAIN")
+    api_id = int(os.environ.get("TG_API_ID") or "2834")
+    api_hash = os.environ.get("TG_API_HASH") or "68875f756c9b437a8b916ca3de215815"
+    domain = os.environ.get("PROXY_DOMAIN") or None
 
     results = []
 

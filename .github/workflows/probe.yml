@@ -25,22 +25,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Check secrets
-        env:
-          PROXY_HOST: ${{ secrets.PROXY_HOST }}
-          PROXY_PORT: ${{ secrets.PROXY_PORT }}
-          PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        run: |
-          for var in PROXY_HOST PROXY_PORT PROXY_SECRET TG_BOT_TOKEN; do
-            val=$(printenv "$var" || true)
-            if [ -z "$val" ]; then
-              echo "WARNING: $var is empty or unset"
-            else
-              echo "$var is set (${#val} chars)"
-            fi
-          done
-
       - name: Run probes
         env:
           PROXY_HOST: ${{ secrets.PROXY_HOST }}
@@ -48,8 +32,6 @@ jobs:
           PROXY_SECRET: ${{ secrets.PROXY_SECRET }}
           PROXY_DOMAIN: ${{ secrets.PROXY_DOMAIN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_API_ID: ${{ secrets.TG_API_ID }}
-          TG_API_HASH: ${{ secrets.TG_API_HASH }}
         run: python -m probes.runner --probe-id github-us --region "US (GitHub Actions)"
 
       - name: Prune old history
