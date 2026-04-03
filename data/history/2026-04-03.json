@@ -45,5 +45,21 @@
     "direct_ok": 5,
     "direct_total": 5,
     "proxy_obfs2_ok": true
+  },
+  {
+    "timestamp": "2026-04-03T18:19:59Z",
+    "probe_id": "github-us",
+    "region": "US (GitHub Actions)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": true
+  },
+  {
+    "timestamp": "2026-04-03T18:20:12Z",
+    "probe_id": "russia-firstvds",
+    "region": "Russia (FirstVDS)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": true
   }
 ]
