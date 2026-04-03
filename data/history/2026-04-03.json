@@ -5,5 +5,13 @@
     "region": "US (GitHub Actions)",
     "direct_ok": 5,
     "direct_total": 5
+  },
+  {
+    "timestamp": "2026-04-03T17:47:39Z",
+    "probe_id": "github-us",
+    "region": "US (GitHub Actions)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": false
   }
 ]
