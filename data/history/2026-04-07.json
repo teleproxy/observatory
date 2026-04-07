@@ -46,5 +46,21 @@
     "direct_ok": 5,
     "direct_total": 5,
     "proxy_obfs2_ok": true
+  },
+  {
+    "timestamp": "2026-04-07T18:13:01Z",
+    "probe_id": "russia",
+    "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": true
+  },
+  {
+    "timestamp": "2026-04-07T18:13:02Z",
+    "probe_id": "github-us",
+    "region": "\ud83c\uddfa\ud83c\uddf8 US (GitHub Actions)",
+    "direct_ok": 5,
+    "direct_total": 5,
+    "proxy_obfs2_ok": true
   }
 ]
