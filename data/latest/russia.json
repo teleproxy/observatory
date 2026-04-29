@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-04-29T18:46:24Z",
+  "timestamp": "2026-04-29T20:20:08Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
     "dc1": {
       "status": "fail",
-      "latency_ms": 5007,
+      "latency_ms": 5008,
       "error": "timed out"
     },
     "dc2": {
       "status": "fail",
-      "latency_ms": 5002,
+      "latency_ms": 5005,
       "error": "timed out"
     },
     "dc3": {
@@ -20,12 +20,12 @@
     },
     "dc4": {
       "status": "fail",
-      "latency_ms": 5002,
+      "latency_ms": 5005,
       "error": "timed out"
     },
     "dc5": {
       "status": "fail",
-      "latency_ms": 5003,
+      "latency_ms": 5005,
       "error": "timed out"
     }
   },
@@ -34,12 +34,12 @@
     {
       "transport": "obfs2",
       "connected": true,
-      "authenticated": true,
-      "get_me": true,
-      "connect_ms": 5444,
-      "auth_ms": 1452,
-      "total_ms": 7254,
-      "error": null
+      "authenticated": false,
+      "get_me": false,
+      "connect_ms": 5400,
+      "auth_ms": null,
+      "total_ms": 6834,
+      "error": "SessionRevokedError: The authorization has been invalidated, because of the user terminating all sessions (caused by GetDifferenceRequest)"
     }
   ]
 }
