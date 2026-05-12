@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-05-11T23:09:47Z",
+  "timestamp": "2026-05-12T00:09:08Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
     "dc1": {
       "status": "fail",
-      "latency_ms": 5005,
+      "latency_ms": 5008,
       "error": "timed out"
     },
     "dc2": {
       "status": "fail",
-      "latency_ms": 5003,
+      "latency_ms": 5005,
       "error": "timed out"
     },
     "dc3": {
@@ -20,12 +20,12 @@
     },
     "dc4": {
       "status": "fail",
-      "latency_ms": 5006,
+      "latency_ms": 5005,
       "error": "timed out"
     },
     "dc5": {
       "status": "fail",
-      "latency_ms": 5005,
+      "latency_ms": 5004,
       "error": "timed out"
     }
   },
@@ -34,12 +34,12 @@
     {
       "transport": "obfs2",
       "connected": true,
-      "authenticated": false,
-      "get_me": false,
-      "connect_ms": 5480,
-      "auth_ms": null,
-      "total_ms": 6569,
-      "error": "SessionRevokedError: The authorization has been invalidated, because of the user terminating all sessions (caused by GetStateRequest)"
+      "authenticated": true,
+      "get_me": true,
+      "connect_ms": 5402,
+      "auth_ms": 1445,
+      "total_ms": 7203,
+      "error": null
     }
   ]
 }
