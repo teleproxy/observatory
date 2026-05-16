@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-16T19:31:29Z",
+  "timestamp": "2026-05-16T21:03:27Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
@@ -36,9 +36,9 @@
       "connected": true,
       "authenticated": true,
       "get_me": true,
-      "connect_ms": 5619,
-      "auth_ms": 1436,
-      "total_ms": 7409,
+      "connect_ms": 5677,
+      "auth_ms": 1434,
+      "total_ms": 7463,
       "error": null
     }
   ]
