@@ -1,27 +1,27 @@
 {
-  "timestamp": "2026-05-26T04:33:22Z",
+  "timestamp": "2026-05-26T08:42:33Z",
   "probe_id": "github-us",
   "region": "\ud83c\uddfa\ud83c\uddf8 US (GitHub Actions)",
   "direct": {
     "dc1": {
       "status": "ok",
-      "latency_ms": 51
+      "latency_ms": 48
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 146
+      "latency_ms": 141
     },
     "dc3": {
       "status": "ok",
-      "latency_ms": 53
+      "latency_ms": 47
     },
     "dc4": {
       "status": "ok",
-      "latency_ms": 141
+      "latency_ms": 134
     },
     "dc5": {
       "status": "ok",
-      "latency_ms": 177
+      "latency_ms": 195
     }
   },
   "target": "\ud83c\uddf8\ud83c\uddec Singapore VPS",
@@ -31,9 +31,9 @@
       "connected": true,
       "authenticated": true,
       "get_me": true,
-      "connect_ms": 6192,
-      "auth_ms": 1420,
-      "total_ms": 8110,
+      "connect_ms": 6093,
+      "auth_ms": 1480,
+      "total_ms": 7967,
       "error": null
     }
   ]
