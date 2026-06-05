@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-06-05T16:38:06Z",
+  "timestamp": "2026-06-05T19:06:24Z",
   "probe_id": "github-us",
   "region": "\ud83c\uddfa\ud83c\uddf8 US (GitHub Actions)",
   "direct": {
     "dc1": {
       "status": "ok",
-      "latency_ms": 27
+      "latency_ms": 28
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 85
+      "latency_ms": 92
     },
     "dc3": {
       "status": "ok",
-      "latency_ms": 28
+      "latency_ms": 27
     },
     "dc4": {
       "status": "ok",
-      "latency_ms": 91
+      "latency_ms": 90
     },
     "dc5": {
       "status": "ok",
@@ -28,13 +28,13 @@
   "proxy": [
     {
       "transport": "obfs2",
-      "connected": true,
-      "authenticated": true,
-      "get_me": true,
-      "connect_ms": 5922,
-      "auth_ms": 1678,
-      "total_ms": 8039,
-      "error": null
+      "connected": false,
+      "authenticated": false,
+      "get_me": false,
+      "connect_ms": null,
+      "auth_ms": null,
+      "total_ms": 4171,
+      "error": "IncompleteReadError: 0 bytes read on a total of 4 expected bytes"
     }
   ]
 }
