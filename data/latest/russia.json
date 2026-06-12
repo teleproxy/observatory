@@ -1,26 +1,26 @@
 {
-  "timestamp": "2026-06-12T12:29:09Z",
+  "timestamp": "2026-06-12T16:27:01Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
     "dc1": {
       "status": "fail",
-      "latency_ms": 5005,
+      "latency_ms": 5010,
       "error": "timed out"
     },
     "dc2": {
       "status": "fail",
-      "latency_ms": 5005,
+      "latency_ms": 5002,
       "error": "timed out"
     },
     "dc3": {
       "status": "fail",
-      "latency_ms": 5006,
+      "latency_ms": 5005,
       "error": "timed out"
     },
     "dc4": {
       "status": "fail",
-      "latency_ms": 5004,
+      "latency_ms": 5001,
       "error": "timed out"
     },
     "dc5": {
@@ -33,13 +33,13 @@
   "proxy": [
     {
       "transport": "obfs2",
-      "connected": false,
-      "authenticated": false,
-      "get_me": false,
-      "connect_ms": null,
-      "auth_ms": null,
-      "total_ms": 3185,
-      "error": "IncompleteReadError: 0 bytes read on a total of 4 expected bytes"
+      "connected": true,
+      "authenticated": true,
+      "get_me": true,
+      "connect_ms": 5970,
+      "auth_ms": 1718,
+      "total_ms": 8041,
+      "error": null
     }
   ]
 }
