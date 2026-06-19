@@ -1,40 +1,40 @@
 {
-  "timestamp": "2026-06-19T18:05:50Z",
+  "timestamp": "2026-06-19T20:01:50Z",
   "probe_id": "github-us",
   "region": "\ud83c\uddfa\ud83c\uddf8 US (GitHub Actions)",
   "direct": {
     "dc1": {
       "status": "ok",
-      "latency_ms": 51
+      "latency_ms": 66
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 138
+      "latency_ms": 144
     },
     "dc3": {
       "status": "ok",
-      "latency_ms": 49
+      "latency_ms": 78
     },
     "dc4": {
       "status": "ok",
-      "latency_ms": 131
+      "latency_ms": 143
     },
     "dc5": {
       "status": "ok",
-      "latency_ms": 177
+      "latency_ms": 253
     }
   },
   "target": "\ud83c\uddf8\ud83c\uddec Singapore VPS",
   "proxy": [
     {
       "transport": "obfs2",
-      "connected": true,
-      "authenticated": true,
-      "get_me": true,
-      "connect_ms": 5507,
-      "auth_ms": 1410,
-      "total_ms": 7260,
-      "error": null
+      "connected": false,
+      "authenticated": false,
+      "get_me": false,
+      "connect_ms": null,
+      "auth_ms": null,
+      "total_ms": 6062,
+      "error": "NeedMemberInvalidError: The provided member is invalid or does not exist (for example a thumb size) (caused by InvokeWithLayerRequest(InitConnectionRequest(GetConfigRequest)))"
     }
   ]
 }
