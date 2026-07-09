@@ -30,5 +30,13 @@
     "direct_ok": 5,
     "direct_total": 5,
     "proxy_obfs2_ok": true
+  },
+  {
+    "timestamp": "2026-07-09T11:21:55Z",
+    "probe_id": "russia",
+    "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
+    "direct_ok": 0,
+    "direct_total": 5,
+    "proxy_obfs2_ok": true
   }
 ]
