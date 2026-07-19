@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-19T06:41:20Z",
+  "timestamp": "2026-07-19T09:15:00Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
@@ -34,12 +34,12 @@
     {
       "transport": "obfs2",
       "connected": true,
-      "authenticated": true,
-      "get_me": true,
-      "connect_ms": 5507,
-      "auth_ms": 1420,
-      "total_ms": 7282,
-      "error": null
+      "authenticated": false,
+      "get_me": false,
+      "connect_ms": 5456,
+      "auth_ms": null,
+      "total_ms": 6870,
+      "error": "SessionRevokedError: The authorization has been invalidated, because of the user terminating all sessions (caused by GetDifferenceRequest)"
     }
   ]
 }
