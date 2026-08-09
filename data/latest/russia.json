@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-09T17:45:40Z",
+  "timestamp": "2026-08-09T18:58:41Z",
   "probe_id": "russia",
   "region": "\ud83c\uddf7\ud83c\uddfa Russia (Moscow VPS)",
   "direct": {
@@ -10,12 +10,12 @@
     },
     "dc2": {
       "status": "fail",
-      "latency_ms": 5008,
+      "latency_ms": 5006,
       "error": "timed out"
     },
     "dc3": {
       "status": "fail",
-      "latency_ms": 5001,
+      "latency_ms": 5003,
       "error": "timed out"
     },
     "dc4": {
@@ -25,7 +25,7 @@
     },
     "dc5": {
       "status": "fail",
-      "latency_ms": 5006,
+      "latency_ms": 5000,
       "error": "timed out"
     }
   },
@@ -36,9 +36,9 @@
       "connected": true,
       "authenticated": true,
       "get_me": true,
-      "connect_ms": 5534,
-      "auth_ms": 1419,
-      "total_ms": 7383,
+      "connect_ms": 5729,
+      "auth_ms": 1425,
+      "total_ms": 7509,
       "error": null
     }
   ]
