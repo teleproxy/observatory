@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-08-13T13:44:09Z",
+  "timestamp": "2026-08-13T15:12:36Z",
   "probe_id": "github-us",
   "region": "\ud83c\uddfa\ud83c\uddf8 US (GitHub Actions)",
   "direct": {
     "dc1": {
       "status": "ok",
-      "latency_ms": 29
+      "latency_ms": 27
     },
     "dc2": {
       "status": "ok",
-      "latency_ms": 91
+      "latency_ms": 90
     },
     "dc3": {
       "status": "ok",
@@ -17,7 +17,7 @@
     },
     "dc4": {
       "status": "ok",
-      "latency_ms": 91
+      "latency_ms": 90
     },
     "dc5": {
       "status": "ok",
@@ -31,9 +31,9 @@
       "connected": true,
       "authenticated": true,
       "get_me": true,
-      "connect_ms": 5998,
-      "auth_ms": 1599,
-      "total_ms": 7989,
+      "connect_ms": 8275,
+      "auth_ms": 1823,
+      "total_ms": 10490,
       "error": null
     }
   ]
